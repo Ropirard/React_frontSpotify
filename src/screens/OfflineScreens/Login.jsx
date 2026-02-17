@@ -73,8 +73,11 @@ const Login = () => {
             )}
           </div>
           <p className="mt-6 text-center text-gray-300 text-sm">
-            Pas encore de compte ?{' '}
-            <Link to={"/register"} className="text-green font-semibold hover:text-green_top underline underline-offset-2 transition-colors">
+            Pas encore de compte ?{" "}
+            <Link
+              to={"/register"}
+              className="text-green font-semibold hover:text-green_top underline underline-offset-2 transition-colors"
+            >
               Créer un compte
             </Link>
           </p>
