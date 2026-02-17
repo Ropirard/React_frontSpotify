@@ -28,7 +28,7 @@ const AppRouter = () => {
   const [inSession, setInSession] = useState(null);
 
   // Récupérer les fonctions du contexte d'authentification
-  const { userId, setUserId, setEmail, setNickname } = useAuthContext;
+  const { userId, setUserId, setEmail, setNickname } = useAuthContext();
 
   // Récupération des données utilisateurs du localStorage
   const userInfos = JSON.parse(localStorage.getItem(USER_INFOS));

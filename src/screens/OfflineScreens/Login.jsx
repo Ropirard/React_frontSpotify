@@ -3,6 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import CustomInput from "../../components/Ui/CustomInput";
 import ErrorMessage from "../../components/Ui/ErrorMessage";
 import ButtonLoader from "../../components/Loader/ButtonLoader";
+import { useAuthContext } from "../../contexts/AuthContext";
+import axios from "axios";
+import { API_ROOT } from "../../constants/apiConstant";
 
 const Login = () => {
   // On déclare nos state pour les valeurs du formulaire
@@ -14,6 +17,8 @@ const Login = () => {
 
   // On récupère le hook de navigation
   const navigate = useNavigate();
+  // On récupère la méthode signIn du AuthContext
+  const { signIn } = useAuthContext();
 
   useEffect(() => {
     // Si j'ai un utilisateur en session, alors on le redirige sur "/" du router online
@@ -25,6 +30,43 @@ const Login = () => {
   // Méthode qui réceptionne les données du formulaire
   const handleSubmit = async (event) => {
     event.preventDefault(); // On empêche le comportement naturel du formulaire
+    setIsLoading(true); // On passe isLoading à true pour afficher le loader
+    setErrorMessage(""); // On vide les messages d'erreur
+
+    
+    try {
+      // On vérifie que les champs sont bien rempli
+      if (email == "" || password == "") {
+        setErrorMessage("Tous les champs doivent être remplis");
+        return;
+      }
+
+      // On execute la requête sur l'API
+      const response = await axios.post(`${API_ROOT}/login`, {
+        email,
+        password,
+      });
+
+      if (response.data.success === false) {
+        setErrorMessage(response.data.message);
+      } else {
+        // On reconstruit un objet user
+        const loggedInUser = {
+          userId: response.data.id,
+          email: response.data.email,
+          nickname: response.data.nickname,
+        };
+
+        // On appelle la méthode signIn de authContext pour enregistrer l'utilisateur
+        await signIn(loggedInUser);
+        setUser(loggedInUser);
+      }
+    } catch (error) {
+      console.log(`Erreur lors de la connexion : ${error}`);
+      setErrorMessage("Email et/ou mot de passe incorrect");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
