@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const Navlinks = ({ data, marginTop, handleClick, userId = 0 }) => {
-  console.log("DATA", data);
 
   return (
     <div className={marginTop}>
@@ -16,7 +15,7 @@ const Navlinks = ({ data, marginTop, handleClick, userId = 0 }) => {
             className={"link-sidebar"}
             onClick={() => handleClick && handleClick()}
           >
-            {<item.icon className="mr-2"/>}
+            {<item.icon className="mr-2" />}
             {item.title}
           </NavLink>
         ))}

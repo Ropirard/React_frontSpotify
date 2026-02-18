@@ -1,6 +1,8 @@
-import { AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineAppstoreAdd, AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
 import { IMAGE_URL } from "./apiConstant";
 import { BiLibrary } from "react-icons/bi";
+import { MdFavoriteBorder } from "react-icons/md";
+import { FiSettings } from "react-icons/fi";
 
 // ===========================
 //    CLE DU LOCAL STORAGE
@@ -20,3 +22,15 @@ export const dataAlbumNav = [
     {title: "Rechercher", path: "/search", icon: AiOutlineSearch},
     {title: "Bibliothèque", path: "/library", icon: BiLibrary},
 ]
+
+// Navigation utilisateur (compte et playlist)
+export const dataUserNav = [
+    {title: "Voir les playlists", path: "/playlist", icon: AiOutlineAppstoreAdd},
+    {title: "Titres likés", path: "/wishlist", icon: MdFavoriteBorder},
+    {title: "Mon compte", path: "/account/:id", icon: FiSettings},
+]
+
+// STYLES POUR LES ICONES
+
+export const styleIcon = {width:'25px', height:'25px'};
+export const tableIcon = {width:'20px', height:'20px'}
