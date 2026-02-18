@@ -42,7 +42,7 @@
 }
 
 .active, .active svg {
-  @apply text-green text-base- ms-1
+  @apply text-green text-base ms-1
 }
 
 .active:hover, .active:hover svg {
