@@ -38,7 +38,7 @@ const playerSlice = createSlice({
         /**
          * Passe à la chanson suivante dans la playlist
          */
-        setNextSong: (state, action) => {
+        nextSong: (state, action) => {
             // Met à jour la chanson active
             state.activeSong = state.currentSongs[action.payload]
             // Met à jour l'index
@@ -55,7 +55,7 @@ const playerSlice = createSlice({
         /**
          * Passe à la chanson précédente dans la playlist
          */
-        setPrevSong: (state, action) => {
+        prevSong: (state, action) => {
             // Met à jour la chanson active
             state.activeSong = state.currentSongs[action.payload]
             // Met à jour l'index
@@ -78,5 +78,5 @@ const playerSlice = createSlice({
     }
 })
 
-export const {setActiveSong, setActiveAlbum, setNextSong, setPrevSong, playPause} = playerSlice.actions
+export const {setActiveSong, setActiveAlbum, nextSong, prevSong, playPause} = playerSlice.actions
 export default playerSlice.reducer;
