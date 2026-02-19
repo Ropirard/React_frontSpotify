@@ -16,13 +16,13 @@ const PlayPause = ({
     isPlaying && activeSong?.title == songs?.[index]?.title ? (
       <BsPauseCircleFill
         size={size}
-        className="text-green shadow-md cursor-pointer"
+        className="text-blue shadow-md cursor-pointer"
         onClick={handlePause}
       />
     ) : (
       <BsPlayCircleFill
         size={size}
-        className="text-green shadow-md cursor-pointer"
+        className="text-blue shadow-md cursor-pointer"
         onClick={handlePlay}
       />
     )

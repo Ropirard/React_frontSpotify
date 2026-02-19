@@ -118,7 +118,7 @@ const Login = () => {
             Pas encore de compte ?{" "}
             <Link
               to={"/register"}
-              className="text-green font-semibold hover:text-green_top underline underline-offset-2 transition-colors"
+              className="text-blue font-semibold hover:text-blue_top underline underline-offset-2 transition-colors"
             >
               Créer un compte
             </Link>
