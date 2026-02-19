@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import HeaderDetail from "./HeaderDetail";
 
-const DetailAlbum = () => {
+const DetailAlbum = ({ dataAlbum }) => {
   return (
-    <div>DetailAlbum</div>
-  )
-}
+    <>
+      <HeaderDetail dataAlbum={dataAlbum}/>
+    </>
+  );
+};
 
-export default DetailAlbum
+export default DetailAlbum;
