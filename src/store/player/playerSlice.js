@@ -7,7 +7,7 @@ const initialState = {
     currentIndex: 0, // Index de la chanson dans son tableau
     currentSongs: [], // Tableau de toutes les chansons de la playlist/album
     isActive: false, // Le player est-il actif ?
-    isPlaying // La musique est-elle en lecture (true) ou en pause (false) ?
+    isPlaying: false // La musique est-elle en lecture (true) ou en pause (false) ?
 }
 
 const playerSlice = createSlice({
@@ -72,11 +72,11 @@ const playerSlice = createSlice({
         /**
          * Bascule entre play et pause
          */
-        PlayPause: (state, action) => {
+        playPause: (state, action) => {
             state.isPlaying = action.payload
         }
     }
 })
 
-export const {setActiveSong, setActiveAlbum, setNextSong, setPrevSong, PlayPause} = playerSlice.actions
+export const {setActiveSong, setActiveAlbum, setNextSong, setPrevSong, playPause} = playerSlice.actions
 export default playerSlice.reducer;

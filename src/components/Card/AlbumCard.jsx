@@ -1,12 +1,42 @@
 import React from "react";
 import { ALBUMS_URL } from "../../constants/apiConstant";
 import { Link } from "react-router-dom";
+import PlayPause from "../Services/PlayPause";
+import { useDispatch } from "react-redux";
+import {
+  playPause,
+  setActiveAlbum,
+  setActiveSong,
+} from "../../store/player/playerSlice";
 
-const AlbumCard = ({ data }) => {
+const AlbumCard = ({
+  data,
+  songs,
+  isPlaying,
+  index,
+  activeSong,
+  artist = "Inconnu",
+}) => {
+  // On déclare des variables de data
   const imgAlbum = `${ALBUMS_URL}/${data?.imagePath}`;
   const albumId = data?.id ?? 0;
   const albumName = data?.title ?? "";
-  const artistName = data?.artist?.name ?? 'Artiste inconnu';
+  const artistName = data?.artist?.name ?? artist;
+
+  // On récupère le hook dispatch
+  const dispatch = useDispatch();
+
+  // Méthode lorsqu'on met pause
+  const handlePauseClick = () => {
+    dispatch(playPause(false));
+  };
+
+  // Méthode lorsqu'on met play
+  const handlePlayClick = (index) => {
+    dispatch(setActiveSong({ songs, data, index }));
+    dispatch(setActiveAlbum({ data }));
+    dispatch(playPause(true));
+  };
 
   return (
     <div className="flex flex-col w-62.5 p-4 bg-white_01 hover:bg-white_05 transition-all ease-in-out duration-500 animate-slideup rounded-lg cursor-pointer group">
@@ -18,7 +48,23 @@ const AlbumCard = ({ data }) => {
             className="mx-auto rounded-lg object-cover h-52 w-52"
           />
         </Link>
-        {/* TODO : Bouton play/pause */}
+        {/* Bouton play/pause */}
+        <div
+          className={`absolute ${activeSong?.title === songs[index]?.title ? "flex" : "hidden"} group-hover:flex right-3 bottom-5`}
+        >
+          <div className="group-hover:animate-slideup2 bg-black outline-none rounded-full group-hover:duration-75 overflow-hidden">
+            <PlayPause
+              songs={songs}
+              activeSong={activeSong}
+              isPlaying={isPlaying}
+              index={index}
+              data={data}
+              handlePause={handlePauseClick}
+              handlePlay={() => handlePlayClick(index)}
+            />
+          </div>
+        </div>
+
         <div className={``}></div>
         <Link to={`/detail/${albumId}`}>
           <div className="mt-4 flex flex-col">
